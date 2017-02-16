@@ -1,0 +1,7 @@
+/home/devans/.julia/v0.5/NDSpline/deps/src/CMakeFiles/install.dir
+/home/devans/.julia/v0.5/NDSpline/deps/src/CMakeFiles/list_install_components.dir
+/home/devans/.julia/v0.5/NDSpline/deps/src/CMakeFiles/rebuild_cache.dir
+/home/devans/.julia/v0.5/NDSpline/deps/src/CMakeFiles/spline.dir
+/home/devans/.julia/v0.5/NDSpline/deps/src/CMakeFiles/install/strip.dir
+/home/devans/.julia/v0.5/NDSpline/deps/src/CMakeFiles/install/local.dir
+/home/devans/.julia/v0.5/NDSpline/deps/src/CMakeFiles/edit_cache.dir
