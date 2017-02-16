@@ -390,6 +390,8 @@ Spline Spline::load(std::ifstream &fin)
 
 using namespace cxx_wrap;
 
+typedef Matrix<long,Dynamic,1> VectorXl;
+
 class SplineJulia
 {
     Spline f;
@@ -404,13 +406,11 @@ public:
 
     double eval(ArrayRef<double> jx);
 
-    double evald(ArrayRef<double> jx, ArrayRef<int> jd);
+    double evald(ArrayRef<double> jx, ArrayRef<long> jd);
 
-    double evald1d(double x, ArrayRef<int> jd);
+    double evald1d(double x, int d);
 
     double eval1d(double x);
-
-    double basis(double x,int k,int j){return f.Basis(f.getBreakpoints()[0],k,j,x,0);};
 
 
 };
@@ -453,13 +453,13 @@ double SplineJulia::eval(ArrayRef<double> jx)
     return f(x);
 }
 
-double SplineJulia::evald(ArrayRef<double> jx, ArrayRef<int> jd)
+double SplineJulia::evald(ArrayRef<double> jx, ArrayRef<long> jd)
 {
     int nx = jx.size();
     Map<VectorXd> x(&jx[0],nx);
     int nd = jd.size();
-    Map<VectorXi> d(&jd[0],nd);
-    return f(x,d);
+    Map<VectorXl > d(&jd[0],nd);
+    return f(x,d.cast<int>());
 }
 
 
@@ -468,6 +468,16 @@ double SplineJulia::eval1d(double x)
     Matrix<double,1,1> X;
     X(0) = x;
     return f(X);
+}
+
+double SplineJulia::evald1d(double x, int jd)
+{
+  Matrix<double,1,1> X;
+  X(0) = x;
+  Matrix<int,1,1>  d;
+  d(0) = jd;
+
+  return f(X,d);
 }
 
 
@@ -480,7 +490,7 @@ JULIA_CPP_MODULE_BEGIN(registry)
 .method(&SplineJulia::eval1d)
 .method(&SplineJulia::eval)
 .method(&SplineJulia::evald)
-.method("basis",&SplineJulia::basis);
+.method(&SplineJulia::evald1d);
         //
 
 
