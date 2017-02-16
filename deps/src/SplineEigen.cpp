@@ -406,6 +406,8 @@ public:
 
     double evald(ArrayRef<double> jx, ArrayRef<int> jd);
 
+    double evald1d(double x, ArrayRef<int> jd);
+
     double eval1d(double x);
 
     double basis(double x,int k,int j){return f.Basis(f.getBreakpoints()[0],k,j,x,0);};
