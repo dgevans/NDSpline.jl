@@ -15,7 +15,7 @@ function (fun::Array{Spline})(x::Real)
   return g.(fun)
 end
 
-function fit(s::Spline,X::Array<Float64,2>,y::Vector<double>,k::Vector<Int>,ordered::bool)
+function fit(s::Spline,X::Array{Float64,2},y::Vector{Float64},k::Vector{Int},ordered::bool)
   fit(s,X,size(X)[2],y,k,ordered)
 end
 
